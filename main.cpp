@@ -22,7 +22,25 @@ void wypisanie(){
 }
 
 void kolko(){
+int x,y;
+wypisanie();
+cout << "Podaj współrzędne swojego ruchu (x,y): ";
+cin >> x >> y;
+if(x<1 || x>3 || y<1 || y>3){
+    cout << "Podano niepoprawne współrzędne, spróbuj ponownie\n";
+    kolko();
 
+    
+}
+if(t[x-1][y-1] == '-'){
+    t[x-1][y-1] = 'O';
+    
+}
+    else{
+        cout << "To pole jest już zajęte, wybierz inne\n";
+        kolko();
+        
+}
 }
 
 void krzyzyk(){
@@ -31,15 +49,17 @@ void krzyzyk(){
 
 
 void kolko_i_krzyzyk(){
-    int x,y,wybierz;
+    int wybierz;
     cout << "Witaj w grze kółko i krzyżyk\n" << "Wybierz swój znak: 1. O 2. X\n";
     cin >> wybierz;
     switch (wybierz){
         case 1:
             cout << "Wybrałeś O\n";
+            kolko();
             break;
         case 2:
             cout << "Wybrałeś X\n";
+            krzyzyk();
             break;
         default:
             cout << "Brak takiej opcji- wybierz poprawną";
