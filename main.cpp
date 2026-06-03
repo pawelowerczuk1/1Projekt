@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 char t[3][3] = { 
@@ -21,24 +23,38 @@ void wypisanie(){
         }
 }
 
-void kolko(){
-int x,y;
-wypisanie();
-cout << "Podaj współrzędne swojego ruchu (x,y): ";
-cin >> x >> y;
-if(x<1 || x>3 || y<1 || y>3){
-    cout << "Podano niepoprawne współrzędne, spróbuj ponownie\n";
-    kolko();
+void ai_kolko(){
+    int x,y;
 
-    
+    do{
+        x = rand()%3;
+        y = rand()%3;
+
+    }
+    while(t[x][y] != '-' );
+    t[x][y]='X';
 }
-if(t[x-1][y-1] == '-'){
-    t[x-1][y-1] = 'O';
+
+void kolko(){
+    int x,y;
+    wypisanie();
+    do
+    {
+        cout << "Podaj współrzędne swojego ruchu (x,y): ";
+        cin >> x >> y;
+        if(x<1 || x>3 || y<1 || y>3)
+            cout << "Podano niepoprawne współrzędne, spróbuj ponownie\n";
+    }
+    while(x<1 || x>3 || y<1 || y>3);
+
+    if(t[x-1][y-1] == '-'){
+        t[x-1][y-1] = 'O';
     
 }
     else{
         cout << "To pole jest już zajęte, wybierz inne\n";
         kolko();
+        
         
 }
 }
@@ -71,6 +87,7 @@ void kolko_i_krzyzyk(){
 
 
 int main(){
+    srand(time(0));
     int wybor;
     cout << " ==== Menu głowne ====\n";
     cout << "1. Blackjack\n";
