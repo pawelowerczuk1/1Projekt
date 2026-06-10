@@ -7,11 +7,22 @@ char tk[3][3] = {
         {'-','-','-'},
         {'-','-','-'}
      };
+int tb[13] = {2,3,4,5,6,7,8,9,10,10,10,11};
 void blackjack(){
 
 }
 
-void wypisanie(){
+void losowa_karta_b(){
+    int x = rand()%13;
+    int losowy= tb[x];
+    
+        
+    }
+
+    
+
+
+void wypisanie_k(){
     cout << "   1   2   3\n" <<  " +---+---+---+\n";
     for(int i=0;i<3;i++){
             cout <<i+1 << "| ";
@@ -48,7 +59,7 @@ void ai_krzyzyk(){
 
 void gracz_kolko(){
     int x,y;
-    wypisanie();
+    wypisanie_k();
     do
     {
         cout << "Podaj współrzędne swojego ruchu (x,y): ";
@@ -73,7 +84,7 @@ void gracz_kolko(){
 
 void gracz_krzyzyk(){
     int x,y;
-    wypisanie();
+    wypisanie_k();
     do
     {
         cout << "Podaj współrzędne swojego ruchu (x,y): ";
