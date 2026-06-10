@@ -9,12 +9,16 @@ char tk[3][3] = {
      };
 int tb[13] = {2,3,4,5,6,7,8,9,10,10,10,11};
 void blackjack(){
+int gracz = losowa_karta_b() + losowa_karta_b();
+int komputer = losowa_karta_b() + losowa_karta_b();
 
+while(gracz < 21){
+}
 }
 
-void losowa_karta_b(){
+int losowa_karta_b(){
     int x = rand()%13;
-    int losowy= tb[x];
+    return tb[x];
     
         
     }
