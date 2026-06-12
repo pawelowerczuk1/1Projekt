@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <windows.h>
 using namespace std;
 char tk[3][3] = { 
         {'-','-','-'},
@@ -8,13 +9,25 @@ char tk[3][3] = {
         {'-','-','-'}
      };
 int tb[13] = {2,3,4,5,6,7,8,9,10,10,10,11};
-void blackjack(){
-int gracz = losowa_karta_b() + losowa_karta_b();
-int komputer = losowa_karta_b() + losowa_karta_b();
 
-while(gracz < 21){
+void wypisanie_karty_b(string figura_karty, string kolor_karty){
+    cout << "+-------+\n";
+    cout << "| " << figura_karty;
+    if(figura_karty == "10") cout << "    |\n";
+    else cout << "     |\n";
+    cout << "|       |\n";
+    cout << "|   "<< kolor_karty << "   |\n";
+    cout << "|       |\n";
+    if(figura_karty == "10") cout << "|    " << figura_karty << " |\n";
+    else cout << "|     " << figura_karty << " |\n";
+    cout << "+-------+\n";
+
+
+
 }
-}
+
+
+
 
 int losowa_karta_b(){
     int x = rand()%13;
@@ -22,6 +35,37 @@ int losowa_karta_b(){
     
         
     }
+
+void blackjack(){
+int gracz[10];
+int komputer = 0;
+char wybor;
+
+gracz[0] = losowa_karta_b();
+gracz[1] = losowa_karta_b();
+
+while(gracz[0] + gracz[1] < 21){
+    cout << "Twoja suma kart: " << gracz[0] + gracz[1] << endl;
+    cout << "Czy chcesz dobrać kartę? (t/n): ";
+    cin >> wybor;
+
+    if(wybor == 't' || wybor == 'T'){
+        gracz[2] = losowa_karta_b();
+    }
+    else if(wybor == 'n' || wybor == 'N'){
+        break;
+    }
+    else{
+        cout << "Niepoprawny wybór, spróbuj ponownie.\n";
+    }
+}
+
+if(gracz[0] + gracz[1] + gracz[2] > 21){
+    cout << "Przegrałeś! Twoja suma kart przekroczyła 21.\n";
+    return;
+}
+}
+
 
     
 
@@ -215,6 +259,8 @@ void kolko_i_krzyzyk(){
 
 int main(){
     srand(time(0));
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
     int wybor;
     cout << " ==== Menu głowne ====\n";
     cout << "1. Blackjack\n";
