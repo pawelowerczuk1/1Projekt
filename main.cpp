@@ -1,3 +1,4 @@
+// W przypadku błędów związanych z <windows.h> (linia 5) lub SetConsoleOutputCP, SetConsoleCP (linia 387 i 388), należy je usunąć- nie są wymagane to działania gry
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
@@ -214,7 +215,7 @@ void gracz_kolko(){
     wypisanie_k();
     do
     {
-        cout << "Podaj współrzędne swojego ruchu (x,y): ";
+        cout << "Podaj współrzędne swojego ruchu (x y): ";
         cin >> x >> y;
         if(x<1 || x>3 || y<1 || y>3)
             cout << "Podano niepoprawne współrzędne, spróbuj ponownie\n";
@@ -239,7 +240,7 @@ void gracz_krzyzyk(){
     wypisanie_k();
     do
     {
-        cout << "Podaj współrzędne swojego ruchu (x,y): ";
+        cout << "Podaj współrzędne swojego ruchu (x y): ";
         cin >> x >> y;
         if(x<1 || x>3 || y<1 || y>3)
             cout << "Podano niepoprawne współrzędne, spróbuj ponownie\n";
@@ -360,6 +361,26 @@ void kolko_i_krzyzyk(){
     
 }
 
+void kolko_i_krzyzyk2(){
+    for(int i=0;i<3;i++){
+        for(int j=0;j<3;j++){
+            tk[i][j] = '-';
+        }
+    }
+    int wynik=0;
+    while(wynik==0){
+        cout << "Ruch gracza 1 (O)\n";
+        gracz_kolko();
+        wynik = wygrana();
+        if(wynik !=0) return;
+
+        cout << "Ruch gracza 2 (X)\n";
+        gracz_krzyzyk();
+        wynik = wygrana();
+        if(wynik !=0) return;
+    }
+
+}
 
 int main(){
     srand(time(0));
@@ -368,8 +389,8 @@ int main(){
     int wybor;
     cout << " ==== Menu głowne ====\n";
     cout << "1. Blackjack\n";
-    cout << "2. Kółko i krzyżyk\n";
-    cout << "3. \n";
+    cout << "2. Kółko i krzyżyk (ai)\n";
+    cout << "3. Kółko i krzyżyk (2 graczy)\n";
     cout << "0. Wyjdź\n";
     cout << endl << "Wykonane przez Pawła Owerczuk\n";
     cin >> wybor;
@@ -380,11 +401,12 @@ int main(){
             blackjack();
             break;
         case 2:
-            cout << "Wybrałeś Kółko i krzyżyk\n";
+            cout << "Wybrałeś Kółko i krzyżyk (ai)\n";
             kolko_i_krzyzyk();
             break;
         case 3:
-            cout << "Wybrałeś grę w ";
+            cout << "Wybrałeś grę Kółko i krzyżyk (2 graczy)\n";
+            kolko_i_krzyzyk2();
             break;
         case 0:
             cout << "Wybrałeś wyjście\n";
